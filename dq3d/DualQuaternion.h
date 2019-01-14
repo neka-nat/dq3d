@@ -393,12 +393,12 @@ expdq(const std::pair<Eigen::Quaternion<T>, Eigen::Quaternion<T> > & v8x1 )
 }
 
 template<typename T>
-std::pair<Eigen::Quaternion<T>, Eigen::Quaternion<T> >
+DualQuaternion<T>
 logdq(const DualQuaternion<T> & dq)
 {
     Eigen::Quaternion<T> real = logq(dq.real());
     Eigen::Quaternion<T> dual = dq.real().inverse() * dq.dual();
-    return std::make_pair(real, dual);
+    return DualQuaternion<T>(real, dual);
 }
 
 } // end namespace Eigen
