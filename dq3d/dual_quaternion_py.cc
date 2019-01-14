@@ -85,8 +85,6 @@ PYBIND11_MODULE(_eigen_dq, m) {
       .def("transform_vector", &DualQuaternion<Float>::transformVector)
       .def("exp", &DualQuaternion<Float>::exp)
       .def("log", &DualQuaternion<Float>::log)
-      .def("real", &DualQuaternion<Float>::real)
-      .def("dual", &DualQuaternion<Float>::dual)
       .def("roatation", &DualQuaternion<Float>::rotation)
       .def("translation", &DualQuaternion<Float>::translation)
       .def("translation_quaternion", &DualQuaternion<Float>::translationQuaternion)
