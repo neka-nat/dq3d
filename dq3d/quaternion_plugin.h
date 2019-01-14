@@ -1,3 +1,4 @@
+static Quaternion<Scalar> create(Scalar x, Scalar y, Scalar z, Scalar w) {return Quaternion<Scalar>(w, x, y, z);}
 EIGEN_DEVICE_FUNC inline const Coefficients& getCoeffs() {return m_coeffs;}
 EIGEN_DEVICE_FUNC inline void setCoeffs(const Coefficients& other) {this->coeffs() = other;}
 EIGEN_DEVICE_FUNC inline Scalar getW() {return this->w();}

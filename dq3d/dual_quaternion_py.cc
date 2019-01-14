@@ -13,8 +13,8 @@ using namespace Eigen;
 typedef double Float;
 
 PYBIND11_MODULE(_eigen_dq, m) {
-    py::class_<Quaternion<Float> >(m, "Quaternion")
-      .def(py::init<Float, Float, Float, Float>())
+    py::class_<Quaternion<Float> >(m, "quat")
+      .def(py::init(&Quaternion<Float>::create))
       .def_property("coeffs", &Quaternion<Float>::getCoeffs, &Quaternion<Float>::setCoeffs)
       .def_property("w", &Quaternion<Float>::getW, &Quaternion<Float>::setW)
       .def_property("x", &Quaternion<Float>::getX, &Quaternion<Float>::setX)
@@ -35,7 +35,7 @@ PYBIND11_MODULE(_eigen_dq, m) {
       .def("inverse", &Quaternion<Float>::inverse)
       .def(py::self * py::self);
 
-    py::class_<DualQuaternion<Float> >(m, "DualQuaternion")
+    py::class_<DualQuaternion<Float> >(m, "dualquat")
       .def(py::init<Quaternion<Float>&, Quaternion<Float>&>())
       .def_readwrite("real", &DualQuaternion<Float>::m_real)
       .def_readwrite("dual", &DualQuaternion<Float>::m_dual)
