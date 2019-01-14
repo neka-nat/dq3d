@@ -3,3 +3,4 @@
 build
 tmp
 *.so
+dq3d.egg-info

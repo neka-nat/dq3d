@@ -5,6 +5,7 @@ name = "pypi"
 
 [packages]
 "pybind11" = "*"
+numpy = "*"
 
 [dev-packages]
 
