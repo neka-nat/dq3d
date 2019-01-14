@@ -33,7 +33,8 @@ PYBIND11_MODULE(_eigen_dq, m) {
       .def("to_rotation_matrix", &Quaternion<Float>::toRotationMatrix)
       .def("conjugate", &Quaternion<Float>::conjugate)
       .def("inverse", &Quaternion<Float>::inverse)
-      .def(py::self * py::self);
+      .def(py::self * py::self)
+      .def(py::self *= py::self);
 
     py::class_<DualQuaternion<Float> >(m, "dualquat")
       .def(py::init<Quaternion<Float>&, Quaternion<Float>&>())
@@ -48,7 +49,7 @@ PYBIND11_MODULE(_eigen_dq, m) {
       .def(py::self * py::self)
       .def("from_screw", &DualQuaternion<Float>::fromScrew)
       .def("conjugate", &DualQuaternion<Float>::conjugate)
-      .def("norm", &DualQuaternion<Float>::norm)
+      .def("norm", [](DualQuaternion<Float>& inst) {Float x, y; inst.norm(x, y); return std::make_tuple(x, y);})
       .def("normalize", &DualQuaternion<Float>::normalize)
       .def("normalized", &DualQuaternion<Float>::normalized)
       .def("transform_point", &DualQuaternion<Float>::transformPoint)
