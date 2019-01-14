@@ -63,6 +63,7 @@ ext_modules = [
         ['dq3d/dual_quaternion_py.cc'],
         include_dirs=[
             # Path to pybind11 headers
+            './dq3d',
             get_pybind_include(),
             get_pybind_include(user=True),
             find_eigen()
