@@ -1,4 +1,5 @@
 #include <vector>
+#include <sstream>
 #define EIGEN_QUATERNION_PLUGIN <quaternion_plugin.h>
 #include <Eigen/Dense>
 #define private public
@@ -34,7 +35,12 @@ PYBIND11_MODULE(_eigen_dq, m) {
       .def("conjugate", &Quaternion<Float>::conjugate)
       .def("inverse", &Quaternion<Float>::inverse)
       .def(py::self * py::self)
-      .def(py::self *= py::self);
+      .def(py::self *= py::self)
+      .def("__repr__", [](const Quaternion<Float>& inst) {
+          std::stringstream ss;
+	  ss << "< " << inst.coeffs().transpose() << " >";
+	  return ss.str();
+        });
 
     py::class_<DualQuaternion<Float> >(m, "dualquat")
       .def(py::init<Quaternion<Float>&, Quaternion<Float>&>())
@@ -49,7 +55,9 @@ PYBIND11_MODULE(_eigen_dq, m) {
       .def(py::self * py::self)
       .def("from_screw", &DualQuaternion<Float>::fromScrew)
       .def("conjugate", &DualQuaternion<Float>::conjugate)
-      .def("norm", [](DualQuaternion<Float>& inst) {Float x, y; inst.norm(x, y); return std::make_tuple(x, y);})
+      .def("norm", [](DualQuaternion<Float>& inst) {
+	  Float x, y; inst.norm(x, y); return std::make_tuple(x, y);
+	})
       .def("normalize", &DualQuaternion<Float>::normalize)
       .def("normalized", &DualQuaternion<Float>::normalized)
       .def("transform_point", &DualQuaternion<Float>::transformPoint)
@@ -60,7 +68,13 @@ PYBIND11_MODULE(_eigen_dq, m) {
       .def("roatation", &DualQuaternion<Float>::rotation)
       .def("translation", &DualQuaternion<Float>::translation)
       .def("translation_quaternion", &DualQuaternion<Float>::translationQuaternion)
-      .def("to_matrix", &DualQuaternion<Float>::toMatrix);
+      .def("to_matrix", &DualQuaternion<Float>::toMatrix)
+      .def("__repr__", [](const DualQuaternion<Float>& inst) {
+          std::stringstream ss;
+	  ss << "<real: " << inst.real().coeffs().transpose()
+	     << ", dual: "<< inst.dual().coeffs().transpose() << " >";
+	  return ss.str();
+        });
 
     m.def("expq", &expq<Float>);
     m.def("logq", &logq<Float>);
