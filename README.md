@@ -1,4 +1,5 @@
 # dq3d
+[![PyPI version](https://badge.fury.io/py/dq3d.svg)](https://badge.fury.io/py/dq3d)
 
 Dual quaternion for 3d geometric operations.
 
