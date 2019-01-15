@@ -6,12 +6,12 @@ Dual quaternion for 3d geometric operations.
 ## examples
 
 ### Skinning
-This sample a demonstration of skinning with Dual quaternion Linear Blending.
+This example is a demonstration of skinning with Dual quaternion Linear Blending.
 
 ![skinning](images/skinning.gif)
 
 ### Sclerp
-This sample is a demonstration that interpolates between two randomly generated dual quaternions with ScLerp.
+This example is a demonstration that interpolates between two randomly generated dual quaternions with ScLerp.
 
 ![sclerp](images/sclerp.gif)
 
