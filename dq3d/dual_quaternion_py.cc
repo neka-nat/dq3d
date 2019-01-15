@@ -65,6 +65,7 @@ PYBIND11_MODULE(_eigen_dq, m) {
       .def("normalized", &DualQuaternion<Float>::normalized)
       .def("transform_point", &DualQuaternion<Float>::transformPoint)
       .def("transform_vector", &DualQuaternion<Float>::transformVector)
+      .def("inverse", &DualQuaternion<Float>::inverse)
       .def("exp", &DualQuaternion<Float>::exp)
       .def("log", &DualQuaternion<Float>::log)
       .def("pow", [](DualQuaternion<Float>& inst, Float t) {return (inst.log() * t).exp();})
