@@ -1,4 +1,4 @@
-EIGEN_DEVICE_FUNC inline const Coefficients getData() {
+EIGEN_DEVICE_FUNC inline const Coefficients getData() const{
     return (Matrix<Scalar, 4, 1>() << this->coeffs()[3], this->coeffs()[0], this->coeffs()[1], this->coeffs()[2]).finished();}
 EIGEN_DEVICE_FUNC inline void setData(const Coefficients& other) {
     this->coeffs()[3] = other[0]; this->coeffs()[0] = other[1]; this->coeffs()[1] = other[2]; this->coeffs()[2] = other[3];}

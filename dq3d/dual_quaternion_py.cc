@@ -39,7 +39,7 @@ PYBIND11_MODULE(_eigen_dq, m) {
       .def(py::self *= py::self)
       .def("__repr__", [](const Quaternion<Float>& inst) {
           std::stringstream ss;
-          ss << "< " << inst.coeffs().transpose() << " >";
+          ss << "< " << inst.getData().transpose() << " >";
           return ss.str();
         });
 
@@ -75,8 +75,8 @@ PYBIND11_MODULE(_eigen_dq, m) {
       .def("to_matrix", &DualQuaternion<Float>::toMatrix)
       .def("__repr__", [](const DualQuaternion<Float>& inst) {
           std::stringstream ss;
-          ss << "<real: " << inst.real().coeffs().transpose()
-             << ", dual: "<< inst.dual().coeffs().transpose() << " >";
+          ss << "<real: " << inst.real().getData().transpose()
+             << ", dual: "<< inst.dual().getData().transpose() << " >";
           return ss.str();
         });
 
