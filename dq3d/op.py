@@ -3,3 +3,10 @@ from ._eigen_dq import dualquat
 
 def sclerp(dq1, dq2, t):
     return (dq2 * dq1.conjugate()).pow(t) * dq1
+
+def dlb(ws, dqs):
+    b = dualquat.zeros()
+    for w, d in zip(ws, dqs):
+        b = b + w * d
+    b.normalize()
+    return b

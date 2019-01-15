@@ -15,8 +15,9 @@ typedef double Float;
 
 PYBIND11_MODULE(_eigen_dq, m) {
     py::class_<Quaternion<Float> >(m, "quat")
-      .def(py::init(&Quaternion<Float>::create))
-      .def_property("coeffs", &Quaternion<Float>::getCoeffs, &Quaternion<Float>::setCoeffs)
+      .def(py::init<>())
+      .def(py::init<Float, Float, Float, Float>())
+      .def_property("data", &Quaternion<Float>::getData, &Quaternion<Float>::setData)
       .def_property("w", &Quaternion<Float>::getW, &Quaternion<Float>::setW)
       .def_property("x", &Quaternion<Float>::getX, &Quaternion<Float>::setX)
       .def_property("y", &Quaternion<Float>::getY, &Quaternion<Float>::setY)
@@ -38,12 +39,14 @@ PYBIND11_MODULE(_eigen_dq, m) {
       .def(py::self *= py::self)
       .def("__repr__", [](const Quaternion<Float>& inst) {
           std::stringstream ss;
-	  ss << "< " << inst.coeffs().transpose() << " >";
-	  return ss.str();
+          ss << "< " << inst.coeffs().transpose() << " >";
+          return ss.str();
         });
 
     py::class_<DualQuaternion<Float> >(m, "dualquat")
+      .def(py::init<>())
       .def(py::init<Quaternion<Float>&, Quaternion<Float>&>())
+      .def(py::init<Quaternion<Float>&, Matrix<Float, 3, 1>&>())
       .def_readwrite("real", &DualQuaternion<Float>::m_real)
       .def_readwrite("dual", &DualQuaternion<Float>::m_dual)
       .def_static("zeros", &DualQuaternion<Float>::zeros)
@@ -56,8 +59,8 @@ PYBIND11_MODULE(_eigen_dq, m) {
       .def("from_screw", &DualQuaternion<Float>::fromScrew)
       .def("conjugate", &DualQuaternion<Float>::conjugate)
       .def("norm", [](DualQuaternion<Float>& inst) {
-	  Float x, y; inst.norm(x, y); return std::make_tuple(x, y);
-	})
+           Float x, y; inst.norm(x, y); return std::make_tuple(x, y);
+        })
       .def("normalize", &DualQuaternion<Float>::normalize)
       .def("normalized", &DualQuaternion<Float>::normalized)
       .def("transform_point", &DualQuaternion<Float>::transformPoint)
@@ -71,9 +74,9 @@ PYBIND11_MODULE(_eigen_dq, m) {
       .def("to_matrix", &DualQuaternion<Float>::toMatrix)
       .def("__repr__", [](const DualQuaternion<Float>& inst) {
           std::stringstream ss;
-	  ss << "<real: " << inst.real().coeffs().transpose()
-	     << ", dual: "<< inst.dual().coeffs().transpose() << " >";
-	  return ss.str();
+          ss << "<real: " << inst.real().coeffs().transpose()
+             << ", dual: "<< inst.dual().coeffs().transpose() << " >";
+          return ss.str();
         });
 
     m.def("expq", &expq<Float>);
