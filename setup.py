@@ -5,7 +5,7 @@ from setuptools.command.build_ext import build_ext
 import sys
 import setuptools
 
-__version__ = '0.1.0'
+__version__ = '0.2.0'
 
 def find_eigen(hint=[]):
     """
@@ -136,6 +136,7 @@ setup(
     description='Dual Quaternion for 3d transformation',
     long_description='',
     ext_modules=ext_modules,
+    headers=['dq3d/DualQuaternion.h', 'dq3d/quaternon_plugin.h'],
     install_requires=['pybind11>=2.2'],
     cmdclass={'build_ext': BuildExt},
     zip_safe=False,
