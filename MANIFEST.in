@@ -1,0 +1,2 @@
+include dq3d/DualQuaternion.h
+include dq3d/quaternion_plugin.h
