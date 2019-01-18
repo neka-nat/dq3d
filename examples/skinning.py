@@ -7,8 +7,9 @@ from dq3d import op
 # 2 links simulation
 
 link_lens = [1.0, 1.0]
-links = [dualquat(quat.identity(), np.zeros(3)),
-         dualquat(quat.identity(), np.array([link_lens[0], 0.0, 0.0])),]
+links = [dualquat(quat.identity()),
+         dualquat(quat.identity(),
+                  np.array([link_lens[0], 0.0, 0.0]))]
 
 n_surface = 20
 surfaces1 = np.r_[[np.linspace(0.0, 2.0, n_surface),
@@ -29,7 +30,7 @@ fig = plt.figure()
 def update_anim(i):
     plt.cla()
     th = i * 0.5
-    trans = dualquat(quat(*tf.quaternion_from_euler(0.0, 0.0, np.deg2rad(th))), np.zeros(3))
+    trans = dualquat(quat(*tf.quaternion_from_euler(0.0, 0.0, np.deg2rad(th))))
     t_links = [links[0], links[1] * trans * links[1].inverse()]
     t_surfaces = np.array([op.dlb(w, t_links).transform_point(s) for w, s in zip(weights, surfaces)])
 

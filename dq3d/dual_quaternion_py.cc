@@ -47,6 +47,8 @@ PYBIND11_MODULE(_eigen_dq, m) {
       .def(py::init<>())
       .def(py::init<Quaternion<Float>&, Quaternion<Float>&>())
       .def(py::init<Quaternion<Float>&, Matrix<Float, 3, 1>&>())
+      .def(py::init([](Quaternion<Float>& q) {
+           return std::unique_ptr<DualQuaternion<Float>>(new DualQuaternion<Float>(q, Matrix<Float, 3, 1>::Zero()));}))
       .def_readwrite("real", &DualQuaternion<Float>::m_real)
       .def_readwrite("dual", &DualQuaternion<Float>::m_dual)
       .def_static("zeros", &DualQuaternion<Float>::zeros)
