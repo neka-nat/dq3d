@@ -3,10 +3,10 @@
 
 Dual quaternion for 3d geometric operations.
 
-# Installation
+## Installation
 Running `pip install dq3d` should work. 
 
-## macOS
+### macOS
 On macOS, if you get an error `ld: library not found for -lstdc++` do the following. Go to `/Library/Developer/CommandLineTools/Packages/` and install the package `macOS_SDK_headers_for_macOS_10.14.pkg`. They try installing again.
 
 ## examples
