@@ -71,7 +71,7 @@ PYBIND11_MODULE(_eigen_dq, m) {
       .def("exp", &DualQuaternion<Float>::exp)
       .def("log", &DualQuaternion<Float>::log)
       .def("pow", [](DualQuaternion<Float>& inst, Float t) {return (inst.log() * t).exp();})
-      .def("roatation", &DualQuaternion<Float>::rotation)
+      .def("rotation", &DualQuaternion<Float>::rotation)
       .def("translation", &DualQuaternion<Float>::translation)
       .def("translation_quaternion", &DualQuaternion<Float>::translationQuaternion)
       .def("to_matrix", &DualQuaternion<Float>::toMatrix)
