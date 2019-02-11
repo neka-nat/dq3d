@@ -1,3 +1,4 @@
+from functools import reduce
 from ._eigen_dq import quat
 from ._eigen_dq import dualquat
 
@@ -11,11 +12,9 @@ def dlb(ws, dqs):
     """
     Dual quaternion Linear Blending
     """
-    b = dualquat.zeros()
-    for w, d in zip(ws, dqs):
-        b = b + w * d
-    b.normalize()
-    return b
+    return reduce(lambda x, p: x + p[0] * p[1],
+                  zip(ws, dqs),
+                  dualquat.zeros()).normalized()
 
 def dib(ws, dqs, p=(1.0e-4, 1.0e-4)):
     """
@@ -23,9 +22,9 @@ def dib(ws, dqs, p=(1.0e-4, 1.0e-4)):
     """
     b = dlb(ws, dqs)
     while True:
-        x = dualquat.zeros()
-        for w, d in zip(ws, dqs):
-            x = x + w * (b * q).log()
+        x = reduce(lambda x, p: x + p[0] * (b * p[1]).log(),
+                   zip(ws, dqs),
+                   dualquat.zeros())
         b = b * x.exp()
         rn, dn = x.norm()
         if rn < p[0] and dn < p[1]:
