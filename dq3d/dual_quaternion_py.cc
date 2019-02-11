@@ -17,6 +17,10 @@ PYBIND11_MODULE(_eigen_dq, m) {
     py::class_<Quaternion<Float> >(m, "quat")
       .def(py::init<>())
       .def(py::init<Float, Float, Float, Float>())
+      .def(py::init<Matrix<Float, 4, 1>&>())
+      .def(py::init<Matrix<Float, 3, 3>&>())
+      .def(py::init([](Float ang, Matrix<Float, 3, 1>& axis) {
+          return std::unique_ptr<Quaternion<Float>>(new Quaternion<Float>(AngleAxis<Float>(ang, axis)));}))
       .def_property("data", &Quaternion<Float>::getData, &Quaternion<Float>::setData)
       .def_property("w", &Quaternion<Float>::getW, &Quaternion<Float>::setW)
       .def_property("x", &Quaternion<Float>::getX, &Quaternion<Float>::setX)
