@@ -5,7 +5,7 @@ from setuptools.command.build_ext import build_ext
 import sys
 import setuptools
 
-__version__ = '0.3.4'
+__version__ = '0.3.5'
 
 def find_eigen(hint=[]):
     """
@@ -50,6 +50,11 @@ class get_pybind_include(object):
     method can be invoked. """
 
     def __init__(self, user=False):
+        try:
+            import pybind11
+        except ImportError:
+            if subprocess.call([sys.executable, '-m', 'pip', 'install', 'pybind11']):
+                raise RuntimeError('pybind11 install failed.')
         self.user = user
 
     def __str__(self):
@@ -134,8 +139,9 @@ setup(
     author_email='nekanat.stock@gmail.com',
     url='https://github.com/neka-nat/dq3d',
     description='Dual Quaternion for 3d transformation',
-    long_description='',
-    ext_modules=ext_modules,
+    long_description=open('README.md').read(),
+    long_description_content_type='text/markdown',
+     ext_modules=ext_modules,
     headers=['dq3d/DualQuaternion.h', 'dq3d/quaternion_plugin.h'],
     install_requires=['pybind11>=2.2'],
     cmdclass={'build_ext': BuildExt},

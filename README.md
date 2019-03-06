@@ -14,12 +14,12 @@ On macOS, if you get an error `ld: library not found for -lstdc++` do the follow
 ### Skinning
 This example is a demonstration of skinning with Dual quaternion Linear Blending.
 
-![skinning](images/skinning.gif)
+![skinning](https://raw.githubusercontent.com/neka-nat/dq3d/master/images/skinning.gif)
 
 ### Sclerp
 This example is a demonstration that interpolates between two randomly generated dual quaternions with ScLerp.
 
-![sclerp](images/sclerp.gif)
+![sclerp](https://raw.githubusercontent.com/neka-nat/dq3d/master/images/sclerp.gif)
 
 ## References
 * [Skinning with Dual Quaternions](https://www.cs.utah.edu/~ladislav/dq/index.html)
