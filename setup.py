@@ -71,7 +71,7 @@ ext_modules = [
             './dq3d',
             get_pybind_include(),
             get_pybind_include(user=True),
-            find_eigen()
+            find_eigen(['third_party/eigen'])
         ],
         language='c++'
     ),
