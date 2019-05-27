@@ -5,7 +5,7 @@ from setuptools.command.build_ext import build_ext
 import sys
 import setuptools
 
-__version__ = '0.3.5'
+__version__ = '0.3.6'
 
 def find_eigen(hint=[]):
     """
