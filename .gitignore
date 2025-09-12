@@ -5,3 +5,8 @@ tmp
 *.so
 dq3d.egg-info
 *.tar.gz
+/.venv
+uv.lock
+__pycache__/
+dist/
+*.egg-info/
