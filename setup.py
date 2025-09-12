@@ -5,7 +5,7 @@ from setuptools.command.build_ext import build_ext
 import sys
 import setuptools
 
-__version__ = '0.3.6'
+__version__ = '0.3.7'
 
 def find_eigen(hint=[]):
     """
@@ -53,6 +53,7 @@ class get_pybind_include(object):
         try:
             import pybind11
         except ImportError:
+            import subprocess
             if subprocess.call([sys.executable, '-m', 'pip', 'install', 'pybind11']):
                 raise RuntimeError('pybind11 install failed.')
         self.user = user
